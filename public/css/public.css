@@ -1,3 +1,51 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?z6eqm6');
+  src:  url('../fonts/icomoon.eot?z6eqm6#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?z6eqm6') format('truetype'),
+    url('../fonts/icomoon.woff?z6eqm6') format('woff'),
+    url('../fonts/icomoon.svg?z6eqm6#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  color: #333;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-address-book:before {
+  content: "\e944";
+}
+.icon-location:before {
+  content: "\e947";
+}
+.icon-users:before {
+  content: "\e972";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-rocket:before {
+  content: "\e9a5";
+}
+.icon-cross:before {
+  content: "\ea0f";
+  color: maroon;
+}
+
+
 .leaflet-map {
 	min-height: 380px;
 }
