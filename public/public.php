@@ -61,4 +61,19 @@ function enqueue_styles_scripts() {
 
 	// This is the main script that builds the interface and handles user interaction.
 	wp_register_script( 'atm-front-end-content-builder', plugins_url( 'js/front-end-content-builder.js', __FILE__ ) , array( 'jquery', 'vue-js', 'js-cookie', 'esri-leaflet-geocoder-script' ), \ATM_My_Community\get_plugin_version(), true );
+
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		$api_endpoint = 'https://servicesdev.engagementnetwork.org/';
+	} else {
+		$api_endpoint = 'https://services.engagementnetwork.org/';
+	}
+
+	wp_localize_script(
+		'atm-front-end-content-builder',
+		'publicMccVars',
+		array(
+			'apiBase' => $api_endpoint,
+			'crosswalkEndpoint' => 'api-extension/v1/atm/crosswalk',
+		)
+	);
 }
