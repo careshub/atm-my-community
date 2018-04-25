@@ -19,7 +19,7 @@
 		<?php // Geography item list output ?>
 		<h4>Selected Areas</h4>
 		<ul id="geo-short-results" class="geo-short-results-list">
-			<li v-for="(item, index) in items"><input type="checkbox" v-bind:id="'geoidShort-'+item.geoid" checked="checked" name="geoShortResultsList" @click="deleteItem(index)"><label v-bind:for="'geoidShort-'+item.geoid">{{item.label}} <span class="icon-cross"></span></label></li>
+			<li v-for="(item, index) in items"><input type="checkbox" v-bind:id="'geoidShort-'+item.geoid" checked="checked" name="geoShortResultsList" @click="deleteItem(item,index)"><label v-bind:for="'geoidShort-'+item.geoid">{{item.label}} <span class="icon-cross"></span></label></li>
 		</ul>
 	</div>
 

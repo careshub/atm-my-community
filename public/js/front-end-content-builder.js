@@ -400,7 +400,29 @@
         }
       },
       methods: {
-        deleteItem: function (index) {
+        deleteItem: function (element, index) {
+          // Remove the item from the map, too.
+          var gindex = MCC.geoid.indexOf( element.geoid );
+          MCC.geoid.splice( gindex, 1 );
+
+          // we've removed a geography - now need to update the bounds
+          if (MCC.geoid.length === 0) {
+            delete MCC.selectionBounds;
+            map.flyToBounds(MCC.bounds);
+          } else {
+            var layerId = MCC.geog[MCC.currentGeog].select_ids[1];
+            queryFeatures(layerId, MCC.geoid, function (featureCollection) {
+              var geojson = L.geoJSON(featureCollection);
+              MCC.selectionBounds = geojson.getBounds();
+              map.flyToBounds(MCC.selectionBounds);
+            });
+          }
+          setSelectionDef();
+
+           // Remove popup/
+          if (MCC.popup) MCC.popup.remove();
+
+          // Remove the item from the short list.
           this.items.splice(index, 1);
         }
       }
