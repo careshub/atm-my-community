@@ -51,7 +51,7 @@
     * START
     */
     if ($('#' + MCC.map).length) {
-        var layerSelect, layerMCC, legendMCC;
+        var layerSelect, boundaryLayer, legendMCC;
 
         // initialize the map
         var map = L.map(MCC.map, {
@@ -203,45 +203,39 @@ console.log( MCC.geog[activeGeog].select_ids );
             //             // show summary data in filters and charts
             //             // getEngagements();
 
-            //             // remove all selections
-            //             layerSelect.setLayerDefs(resetSelection());
-            //             layerSelect.setLayers(v.select_ids);
+            // console.log( "before:", map );
+            // Add the map layer again to fetch the new boundaries.
+            addBoundaryLayer();
+            // console.log( "after:", map );
 
-            //             // remove existing selection listing
-            //             // populateGeographyList();
-            //             // $(MCC.filterGeog).empty();
-            //         }
-            //         return false;
-            //     }
-            // });
+            // remove all selections
+            layerSelect.setLayerDefs(resetSelection());
         }
 
-        /**
-         * Add map layers as a base layer and selection layer to the map
-         */
-        function addMapLayers() {
-
-            // get all geography button texts
-            $(MCC.cssGeog).each(function (i, v) {
-                // MCC.geog[i].layer_name = $.trim($(v).html());
-
-                // populate geography pull-down list
-                // $("#" + MCC.selectcssGeogID).append(
-                //     //$("<option />", { text: MCC.geog[i].layer_name, value: i})
-                //     $("<li />", {"class": "list-group-item", "data-id": i}).append(MCC.geog[i].layer_name)
-                // );
-            });
-            //$("#" + MCC.selectcssGeogID).val(MCC.igeog);
-            $("#" + MCC.selectcssGeogID).find("li[data-id='" + MCC.igeog + "']").addClass("active");
-
-            // add MCC density map
-            // showDensityMap();
-
-            // show statewide summary
-            // getEngagements();
-
-            // add the boundary's selection layer
+        function addBoundaryLayer() {
             var service = "https://gis3.cares.missouri.edu/arcgis/rest/services/Dynamic/Boundary2016_ECI/MapServer";
+
+            if (boundaryLayer) {
+                boundaryLayer.remove();
+            }
+
+            // console.log( "layer ids", MCC.geog[MCC.currentGeog].select_ids );
+            // add the boundary's selection layer
+            boundaryLayer = L.esri.dynamicMapLayer({
+                url: service,
+                layers: MCC.geog[MCC.currentGeog].layer_ids,
+                layerDefs: resetSelection(),
+                format: "png32",
+                opacity: 1,
+                position: 'front'
+            }).addTo(map);
+
+            if (layerSelect) {
+                layerSelect.remove();
+            }
+
+            // console.log( "layer ids", MCC.geog[MCC.currentGeog].select_ids );
+            // add the boundary's selection layer
             layerSelect = L.esri.dynamicMapLayer({
                 url: service,
                 layers: MCC.geog[MCC.currentGeog].select_ids,
@@ -250,8 +244,14 @@ console.log( MCC.geog[activeGeog].select_ids );
                 opacity: 1,
                 position: 'front'
             }).addTo(map);
+        }
 
-            console.log( layerSelect );
+        /**
+         * Add map layers as a base layer and selection layer to the map
+         */
+        function addMapLayers() {
+
+            addBoundaryLayer();
 
             // add a reference layer, only available 0-13 zoom levels. Move to shadowPane so it's on the top
             var refLayer = L.esri.tiledMapLayer({
