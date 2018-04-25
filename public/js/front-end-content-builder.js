@@ -117,6 +117,10 @@
             // This returns the value of the checked radio button
             // which triggered the event.
             console.log( $(this).val() );
+
+            // Clear selected areas.
+            shortGeoList.items = [];
+
             loadDataActiveGeog( $(this).val() );
         });
 
