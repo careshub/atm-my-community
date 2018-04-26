@@ -351,7 +351,20 @@
     // Add a new Vue component for directory items.
     Vue.component('directory-item', {
       template: '#directory-item-template',
-      props: ['location']
+      props: ['location'],
+      computed: {
+        // a computed getter
+        selectedArea: function () {
+          if ( ! shortGeoList.items ) {
+            return '';
+          }
+          var rendered = [];
+          $( shortGeoList.items ).each( function( index, item ) {
+            rendered.push( item.label );
+          });
+          return rendered.join(', ');
+        }
+      },
     });
 
     // Initialize the directory list
