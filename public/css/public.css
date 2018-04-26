@@ -162,6 +162,22 @@ input[name="geography_type"]:checked + label {
 #atm-directory-list ul li.representative-details {
 	padding-left: 0;
 }
+.percentage-charts {
+	margin-top: 2em;
+}
+.pie-chart-container {
+	min-width: 200px;
+	height: 320px;
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	background-color: #fafafa;
+}
+.pie-chart-container .highcharts-title {
+	font-size: .9rem;
+}
+.pie-chart-container .highcharts-title tspan {
+	margin-bottom: .2em;
+}
 
 
 #choose-my-community-map {

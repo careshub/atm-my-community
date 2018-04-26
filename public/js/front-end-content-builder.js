@@ -265,7 +265,7 @@
                                 className: 'popup'
                             })
                                 .setLatLng(latlng)
-                                .setContent('<h5>' + name + '</h5><p><a href=#atm-directory-list>View data.</a></p>' )
+                                .setContent('<h4>' + name + '</h4><p><a href=#atm-directory-list>View data.</a></p>' )
                                 .openOn(map);
                         }
                         inMissouri = true;
@@ -360,6 +360,14 @@
       data: {
         locations: []
       },
+      updated: function () {
+        this.$nextTick(function () {
+          // Code that will run only after the
+          // entire view has been re-rendered
+          // console.log( "locations changed, running build pie charts." );
+          buildPieCharts();
+        });
+      },
       methods: {
         refresh: function ( geoids ) {
           if ( ! Array.isArray( geoids ) ) {
@@ -395,7 +403,8 @@
           $( items ).each( function( index, item ) {
             geoids.push( item.geoid );
           });
-          // refreshGeographyDirectory();
+
+          // Refresh the directory results.
           directoryList.refresh( geoids );
         }
       },
@@ -436,8 +445,8 @@
       } else {
         cleanParams = encodeURIComponent( params );
       }
-      var apiUrl = publicMccVars.apiBase + endpoint + "?" + cleanParams;
-
+      var apiUrl = publicMccVars.apiBaseUrl + endpoint + "?" + cleanParams;
+      // console.log( "apiurl", apiUrl );
       return $.ajax({
           type: "get",
           url: apiUrl,
@@ -452,6 +461,62 @@
       }).then(function(result) {
         return result;
       });
+    }
+
+    function buildPieCharts() {
+      $( ".pie-chart-container" ).each( function( i, element) {
+        var elementId = element.id;
+        element = $(element);
+        var seriesData = element.data( "chart-series" ) || null,
+            chartTitle = element.data( "chart-title" ) || null;
+
+        // Parse the series data
+        seriesData = seriesData.split(',');
+        var cleanSeries = [];
+        $( seriesData ).each( function( index, value ){
+        value = value.split(':');
+          cleanSeries.push( {
+            name: value[0],
+            y: parseFloat( value[1] )
+          });
+        });
+
+        var args = {
+            chart: {
+                plotBackgroundColor: null,
+                type: 'pie',
+            },
+            title: {
+                text: chartTitle
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+              pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                  enabled: true,
+                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                  style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                  }
+                }
+              }
+            },
+            legend: {},
+            credits: {
+                enabled: false
+            },
+            series: [{
+              name: 'Locations',
+              colorByPoint: true,
+              data: cleanSeries,
+            }]
+        };
+        Highcharts.chart( elementId, args );
+    });
     }
 
   }
