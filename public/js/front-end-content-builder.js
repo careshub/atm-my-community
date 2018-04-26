@@ -459,15 +459,11 @@
         cleanParams = encodeURIComponent( params );
       }
       var apiUrl = publicMccVars.apiBaseUrl + endpoint + "?" + cleanParams;
-      // console.log( "apiurl", apiUrl );
       return $.ajax({
           type: "get",
           url: apiUrl,
           dataType: "json",
-          // dataType: "jsonp",
-          // contentType: "application/json; charset=utf-8",
           crossDomain: true,
-          // jsonp: true,
           error: function ( err ) {
               console.log( 'API error', err );
           }
@@ -481,7 +477,8 @@
         var elementId = element.id;
         element = $(element);
         var seriesData = element.data( "chart-series" ) || null,
-            chartTitle = element.data( "chart-title" ) || null;
+            chartTitle = element.data( "chart-title" ) || null,
+            seriesName = element.data( "chart-series-name" ) || null;
 
         // Parse the series data
         seriesData = seriesData.split(',');
@@ -498,6 +495,7 @@
             chart: {
                 plotBackgroundColor: null,
                 type: 'pie',
+                marginTop: 40
             },
             title: {
                 text: chartTitle
@@ -511,11 +509,12 @@
                 cursor: 'pointer',
                 dataLabels: {
                   enabled: true,
-                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                  format: '<b>{point.name}</b>: {point.percentage:.1f}%',
                   style: {
                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                   }
-                }
+                },
+                size: 100
               }
             },
             legend: {},
@@ -523,7 +522,7 @@
                 enabled: false
             },
             series: [{
-              name: 'Locations',
+              name: seriesName,
               colorByPoint: true,
               data: cleanSeries,
             }]

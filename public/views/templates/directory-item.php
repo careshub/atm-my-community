@@ -27,10 +27,10 @@
 							<li class="percentage-charts">
 								<div class="Grid Grid--guttersXl Grid--full med-Grid--fit">
 									<div class="Grid-cell" v-if="entry.pct_area">
-										<div class="cell-liner pie-chart-container pct_area_container" v-bind:id="'pie-chart-area-' + entry.geoid" v-bind:data-chart-series="entry.name + ':' + entry.pct_area + ',Area not in ' + entry.name +  ':' + ( 100 - entry.pct_area )" v-bind:data-chart-title="'Percent of Area in ' + entry.name + ' Within Selected Area'"></div>
+										<div class="cell-liner pie-chart-container pct_area_container" v-bind:id="'pie-chart-area-' + entry.geoid" v-bind:data-chart-series="entry.name + ':' + entry.pct_area + ',Area not in ' + entry.name +  ':' + ( 100 - entry.pct_area )" v-bind:data-chart-title="'Percentage of ' + entry.name + ' Within Selected Area (Area, sq.  mi.)'" data-chart-series-name="Area"></div>
 									</div>
 									<div class="Grid-cell" v-if="entry.pct_population">
-										<div class="cell-liner pie-chart-container pct_pop_container" v-bind:id="'pie-chart-pop-' + entry.geoid" v-bind:data-chart-series="entry.name + ':' + entry.pct_population + ',Area not in ' + entry.name +  ':' + ( 100 - entry.pct_population )" v-bind:data-chart-title="'Percent of Population in ' + entry.name + ' Within Selected Area'"></div>
+										<div class="cell-liner pie-chart-container pct_pop_container" v-bind:id="'pie-chart-pop-' + entry.geoid" v-bind:data-chart-series="entry.name + ':' + entry.pct_population + ',Pop. not in ' + entry.name +  ':' + ( 100 - entry.pct_population )" v-bind:data-chart-title="'Percentage of ' + entry.name + ' Within Selected Area (Population)'" data-chart-series-name="Population"></div>
 									</div>
 								</div>
 							</li>
