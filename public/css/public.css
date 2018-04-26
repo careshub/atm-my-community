@@ -54,6 +54,13 @@
 	position: relative;
 }
 
+.atm-my-community-location-map .leaflet-control-custom {
+    background-image: url(../images/mo.png);
+    background-color: #f1b82d;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 /* Control to choose a geography level */
 .geography-level-select {
 	margin: .4em 0 1em;
@@ -178,104 +185,3 @@ input[name="geography_type"]:checked + label {
 .pie-chart-container .highcharts-title tspan {
 	margin-bottom: .2em;
 }
-
-
-#choose-my-community-map {
-  position: relative;
-  width: 100%;
-  display: block; }
-  #choose-my-community-map #impact-map {
-    width: 100%;
-    height: 550px;
-    border: 1px solid #8F8884; }
-  #choose-my-community-map #address {
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    z-index: 500;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); }
-  #choose-my-community-map .info {
-    padding: 6px 8px;
-    background: white;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px; }
-  #choose-my-community-map .popup div {
-    color: #f1b82d; }
-  #choose-my-community-map .popup h6, #choose-my-community-map .popup div {
-    text-align: center; }
-  #choose-my-community-map .legend {
-    line-height: 18px;
-    color: #555; }
-    #choose-my-community-map .legend i {
-      width: 18px;
-      height: 18px;
-      float: left;
-      opacity: 0.7; }
-    #choose-my-community-map .legend span {
-      margin-left: 8px; }
-  #choose-my-community-map .leaflet-control-custom {
-    background-image: url(../images/mo.png);
-    background-color: #f1b82d;
-    background-position: center;
-    background-repeat: no-repeat; }
-  #choose-my-community-map .leaflet-map-pane svg {
-    z-index: 1; }
-  #choose-my-community-map iframe {
-    width: 100%;
-    height: 0;
-    border: 0;
-    visibility: visible; }
-  #choose-my-community-map .input-group {
-    position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%; }
-    #choose-my-community-map .input-group .form-control {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-      flex-direction: column;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-      -webkit-box-flex: 1;
-      -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      width: 1%;
-      margin-bottom: 0; }
-    #choose-my-community-map .input-group .input-group-btn {
-      position: relative;
-      font-size: 0;
-      white-space: nowrap;
-      vertical-align: middle;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-      flex-direction: column;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
-      justify-content: center; }
-      #choose-my-community-map .input-group .input-group-btn .btn {
-        border: 1px solid #ccc;
-        background: #f1b82d;
-        box-shadow: 2px 2px 2px #bbb; }
-
-
