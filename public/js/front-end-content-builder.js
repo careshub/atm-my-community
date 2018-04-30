@@ -373,14 +373,6 @@
       data: {
         locations: []
       },
-      updated: function () {
-        this.$nextTick(function () {
-          // Code that will run only after the
-          // entire view has been re-rendered
-          // console.log( "locations changed, running build pie charts." );
-          buildPieCharts();
-        });
-      },
       methods: {
         refresh: function ( geoids ) {
           if ( ! Array.isArray( geoids ) ) {
@@ -470,65 +462,6 @@
       }).then(function(result) {
         return result;
       });
-    }
-
-    function buildPieCharts() {
-      $( ".pie-chart-container" ).each( function( i, element) {
-        var elementId = element.id;
-        element = $(element);
-        var seriesData = element.data( "chart-series" ) || null,
-            chartTitle = element.data( "chart-title" ) || null,
-            seriesName = element.data( "chart-series-name" ) || null;
-
-        // Parse the series data
-        seriesData = seriesData.split(',');
-        var cleanSeries = [];
-        $( seriesData ).each( function( index, value ){
-        value = value.split(':');
-          cleanSeries.push( {
-            name: value[0],
-            y: parseFloat( value[1] )
-          });
-        });
-
-        var args = {
-            chart: {
-                plotBackgroundColor: null,
-                type: 'pie',
-                marginTop: 40
-            },
-            title: {
-                text: chartTitle
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-              pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                  enabled: true,
-                  format: '<b>{point.name}</b>: {point.percentage:.1f}%',
-                  style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                  }
-                },
-                size: 100
-              }
-            },
-            legend: {},
-            credits: {
-                enabled: false
-            },
-            series: [{
-              name: seriesName,
-              colorByPoint: true,
-              data: cleanSeries,
-            }]
-        };
-        Highcharts.chart( elementId, args );
-    });
     }
 
   }

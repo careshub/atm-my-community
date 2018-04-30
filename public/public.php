@@ -36,25 +36,17 @@ function load_plugin_textdomain() {
  */
 function enqueue_styles_scripts() {
 	// Common styles.
-	wp_enqueue_style( \ATM_My_Community\get_plugin_slug() . '-plugin-style', plugins_url( 'css/public.css', __FILE__ ), array('highcharts-style'), \ATM_My_Community\get_plugin_version(), 'all' );
-
-	wp_enqueue_style( 'highcharts-style', 'https://code.highcharts.com/css/highcharts.css', array(), '5.0.7', 'all' );
+	wp_enqueue_style( \ATM_My_Community\get_plugin_slug() . '-plugin-style', plugins_url( 'css/public.css', __FILE__ ), array(), \ATM_My_Community\get_plugin_version(), 'all' );
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 		// Load development versions of scripts for easier debugging.
 		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), '2.5.16', true );
 		wp_register_script( 'leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js', array(), '1.3.1', true );
-		$highcharts_url = 'https://code.highcharts.com/js/highcharts.src.js';
 	} else {
 		// Load production versions.
 		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue', array(), '2.5.16', true );
 		wp_register_script( 'leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js', array(), '1.3.1', true );
-		$highcharts_url = 'https://code.highcharts.com/js/highcharts.js';
 	}
-	wp_register_script( 'highcharts', $highcharts_url, array(), '5.0.7', true );
-
-	// Helper for setting and getting cookies using JS.
-	wp_register_script( 'js-cookie', "https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js", array(), '2.2.0', true );
 
 	// Leaflet styles
 	wp_enqueue_style( 'leaflet-style', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css', array(), '1.3.1', 'screen' );
@@ -65,9 +57,9 @@ function enqueue_styles_scripts() {
 	wp_enqueue_style( 'esri-leaflet-geocoder-style', 'https://unpkg.com/esri-leaflet-geocoder@2.2.8/dist/esri-leaflet-geocoder.css', array(), '2.2.8', 'all' );
 
 	// This is the main script that builds the interface and handles user interaction.
-	wp_register_script( 'atm-front-end-content-builder', plugins_url( 'js/front-end-content-builder.js', __FILE__ ) , array( 'jquery', 'vue-js', 'js-cookie', 'esri-leaflet-geocoder-script', 'highcharts' ), \ATM_My_Community\get_plugin_version(), true );
+	wp_register_script( 'atm-front-end-content-builder', plugins_url( 'js/front-end-content-builder.js', __FILE__ ) , array( 'jquery', 'vue-js', 'esri-leaflet-geocoder-script' ), \ATM_My_Community\get_plugin_version(), true );
 
-	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+	if ( false && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 		$api_endpoint = 'https://servicesdev.engagementnetwork.org/';
 	} else {
 		$api_endpoint = 'https://services.engagementnetwork.org/';

@@ -17,22 +17,14 @@
 							<li class="population district-data-detail" v-if="entry.population"><span class="icon-users"></span>Population: {{entry.population}}</li>
 							<li class="students district-data-detail" v-if="entry.students"><span class="icon-rocket"></span>Students: {{entry.students}}</li>
 							<li class="representative-details" v-if="entry.representative">
+							<li class="pct-area" v-if="entry.pct_area">Percentage of area of my community within {{entry.name}}: {{entry.pct_area}}%</li>
+							<li class="pct-population" v-if="entry.pct_population">Percentage of population of my community within {{entry.name}}: {{entry.pct_population}}%</li>
 								<ul>
 									<li class="representative district-data-detail" ><span class="icon-address-book"></span>{{entry.representative}}<span class="party-affiliation" v-if="entry.party"> &ndash; {{entry.party}}</span></li>
 									<li class="address district-data-detail" v-if="entry.address">{{entry.address}}</li>
 									<li class="phone district-data-detail" v-if="entry.phone">{{entry.phone}}</li>
 									<li class="website district-data-detail" v-if="entry.website">{{entry.website}}</li>
 								</ul>
-							</li>
-							<li class="percentage-charts">
-								<div class="Grid Grid--guttersXl Grid--full med-Grid--fit">
-									<div class="Grid-cell" v-if="entry.pct_area">
-										<div class="cell-liner pie-chart-container pct_area_container" v-bind:id="'pie-chart-area-' + entry.geoid" v-bind:data-chart-series="entry.name + ':' + entry.pct_area + ',Area not in ' + entry.name +  ':' + ( 100 - entry.pct_area )" v-bind:data-chart-title="'Percentage of ' + entry.name + ' Within Selected Area (Area, sq.  mi.)'" data-chart-series-name="Area"></div>
-									</div>
-									<div class="Grid-cell" v-if="entry.pct_population">
-										<div class="cell-liner pie-chart-container pct_pop_container" v-bind:id="'pie-chart-pop-' + entry.geoid" v-bind:data-chart-series="entry.name + ':' + entry.pct_population + ',Pop. not in ' + entry.name +  ':' + ( 100 - entry.pct_population )" v-bind:data-chart-title="'Percentage of ' + entry.name + ' Within Selected Area (Population)'" data-chart-series-name="Population"></div>
-									</div>
-								</div>
 							</li>
 						</ul>
 					</li>
