@@ -168,7 +168,7 @@
                 layerDefs: resetSelection(),
                 format: "png32",
                 opacity: 1,
-                position: 'front'
+                // position: 'front'
             }).addTo(map);
 
             if (layerSelect) {
@@ -265,7 +265,7 @@
                                 className: 'popup'
                             })
                                 .setLatLng(latlng)
-                                .setContent('<h4>' + name + '</h4><p><a href=#atm-directory-list>View data.</a></p>' )
+                                .setContent('<h2>' + name + '</h2><p><a href="#atm-directory-list" class="more-link">View data</a></p>' )
                                 .openOn(map);
                         }
                         inMissouri = true;
@@ -371,10 +371,13 @@
     var directoryList = new Vue({
       el: '#atm-directory-list',
       data: {
-        locations: []
+        locations: [],
+        loading: false,
       },
       methods: {
         refresh: function ( geoids ) {
+          this.loading = true;
+
           if ( ! Array.isArray( geoids ) ) {
             geoids = [];
           }
@@ -382,13 +385,15 @@
           // If there are no chosen areas, no need to query.
           if ( ! geoids.length ) {
             this.locations = [];
+            this.loading = false;
             return;
           }
 
-          var vm = this
+          var vm = this;
           fetchResults( publicMccVars.crosswalkEndpoint, { "id": geoids.join(',') } )
             .then( function(result) {
                 vm.locations = result;
+                vm.loading = false;
             });
         }
       }
@@ -408,6 +413,9 @@
           $( items ).each( function( index, item ) {
             geoids.push( item.geoid );
           });
+
+          // Toggle the "no results item."
+          $( "#geo-short-results-no-selection" ).toggle( 0 === geoids.length );
 
           // Refresh the directory results.
           directoryList.refresh( geoids );

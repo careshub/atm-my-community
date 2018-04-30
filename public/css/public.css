@@ -9,7 +9,8 @@
   font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   color: #333;
@@ -31,20 +32,46 @@
 .icon-location:before {
   content: "\e947";
 }
+.icon-bell:before {
+  content: "\e951";
+}
 .icon-users:before {
   content: "\e972";
 }
 .icon-search:before {
   content: "\e986";
 }
+.icon-stats-bars:before {
+  content: "\e99c";
+}
+.icon-stats-bars2:before {
+  content: "\e99d";
+}
 .icon-rocket:before {
   content: "\e9a5";
+}
+.icon-meter:before {
+  content: "\e9a6";
+}
+.icon-meter2:before {
+  content: "\e9a7";
 }
 .icon-cross:before {
   content: "\ea0f";
   color: maroon;
 }
-
+.icon-radio-checked:before {
+  content: "\ea54";
+}
+.icon-radio-checked2:before {
+  content: "\ea55";
+}
+.icon-radio-unchecked:before {
+  content: "\ea56";
+}
+.icon-spinner8:before {
+  content: "\e981";
+}
 
 .leaflet-map {
 	min-height: 550px;
@@ -102,6 +129,8 @@ input[name="geography_type"]:checked + label {
 .search-submit-button {
 	display: none;
 }
+
+/* Selected geographies user-feedback */
 .geo-short-results-list {
 	list-style-type: none;
 	padding-left: 0;
@@ -127,11 +156,12 @@ input[name="geography_type"]:checked + label {
 	font-size: .8em;
 }
 
+/* Results directory */
 .district_map_container {
 	position: relative;
 	display: inline-block;
 	border: 1px solid #ddd;
-	background-color: #fafafa;
+	/*background-color: #fafafa;*/
 }
 .district_map_container img {
 	position: absolute;
@@ -150,13 +180,16 @@ input[name="geography_type"]:checked + label {
 #atm-directory-list ul li {
 	padding-left: 1.6em;
 }
-
+.district-data-level-1,
+.contact-vcard {
+	margin-bottom: .25em;
+}
 .district-data-detail {
-	width: 100%;
+	width: 95%;
 	display: inline-block;
 }
-.district-data-items [class^="icon-"],
-.district-data-items[class*=" icon-"] {
+.district-data-items [class^="icon-"]:before,
+.district-data-items [class*=" icon-"]:before {
     margin-right: .5em;
     margin-left: -1.6em;
 }
@@ -166,7 +199,21 @@ input[name="geography_type"]:checked + label {
 .district-name {
 	margin-bottom: .5em;
 }
-#atm-directory-list ul li.representative-details {
-	/*padding-left: 0;*/
+#atm-directory-list .district-data-items .contacts .contact-vcard {
+	padding-left: 0;
 }
-
+#atm-directory-list .district-data-items .contacts .contact-vcard li {
+	padding-left: 0;
+}
+.atm-directory-list-results {
+	position: relative
+}
+.directory-list-load-indicator {
+	text-align: center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: rgb( 255, 255, 255, 0.5 );
+}

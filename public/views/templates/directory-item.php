@@ -13,17 +13,23 @@
 					<li v-for="entry in location.district_data">
 						<h4 class="district-name">{{entry.name}}</h4>
 						<ul>
-							<li class="area" v-if="entry.area"><span class="icon-location"></span>{{entry.area}}</li>
-							<li class="population district-data-detail" v-if="entry.population"><span class="icon-users"></span>Population: {{entry.population}}</li>
-							<li class="students district-data-detail" v-if="entry.students"><span class="icon-rocket"></span>Students: {{entry.students}}</li>
-							<li class="representative-details" v-if="entry.representative">
-							<li class="pct-area" v-if="entry.pct_area">Percentage of area of my community within {{entry.name}}: {{entry.pct_area}}%</li>
-							<li class="pct-population" v-if="entry.pct_population">Percentage of population of my community within {{entry.name}}: {{entry.pct_population}}%</li>
+							<li class="area district-data-detail district-data-level-1 icon-location" v-if="entry.area">{{entry.area}}</li>
+							<li class="population district-data-detail district-data-level-1 icon-users" v-if="entry.population">Population: {{entry.population}}</li>
+							<li class="students district-data-detail district-data-level-1 icon-bell" v-if="entry.students">Public School Enrollment: {{entry.students}}</li>
+							<li class="pct-area district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_area">Area of my community within {{entry.name}}: {{entry.pct_area}}%</li>
+							<li class="pct-population district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_population">Population of my community within {{entry.name}}: {{entry.pct_population}}%</li>
+							<li class="contacts district-data-detail district-data-level-1" v-if="entry.contacts">
 								<ul>
-									<li class="representative district-data-detail" ><span class="icon-address-book"></span>{{entry.representative}}<span class="party-affiliation" v-if="entry.party"> &ndash; {{entry.party}}</span></li>
-									<li class="address district-data-detail" v-if="entry.address">{{entry.address}}</li>
-									<li class="phone district-data-detail" v-if="entry.phone">{{entry.phone}}</li>
-									<li class="website district-data-detail" v-if="entry.website">{{entry.website}}</li>
+									<li class="contact-vcard" v-for="contact in entry.contacts">
+										<ul class="icon-address-book">
+											<li class="name district-data-detail" v-if="contact.name">{{contact.name}}<span class="party-affiliation" v-if="contact.party"> &ndash; {{contact.party}}</span></li>
+											<li class="title district-data-detail" v-if="contact.title">{{contact.title}}</li>
+											<li class="address district-data-detail" v-if="contact.address">{{contact.address}}</li>
+											<li class="phone district-data-detail" v-if="contact.phone">{{contact.phone}}</li>
+											<li class="email district-data-detail" v-if="contact.email"><a v-bind:href="'mailto:' + contact.email">{{contact.email}}</a></li>
+											<li class="website district-data-detail" v-if="contact.website"><a v-bind:href="contact.website" target="_blank">{{contact.website}}</a></li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 						</ul>
