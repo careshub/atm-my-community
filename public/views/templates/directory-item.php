@@ -16,8 +16,8 @@
 							<li class="area district-data-detail district-data-level-1 icon-location" v-if="entry.area">{{entry.area}}</li>
 							<li class="population district-data-detail district-data-level-1 icon-users" v-if="entry.population">Population: {{entry.population}}</li>
 							<li class="students district-data-detail district-data-level-1 icon-bell" v-if="entry.students">Public School Enrollment: {{entry.students}}</li>
-							<li class="pct-area district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_area">Area of my community within {{entry.name}}: {{entry.pct_area}}%</li>
-							<li class="pct-population district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_population">Population of my community within {{entry.name}}: {{entry.pct_population}}%</li>
+							<li class="pct-area district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_area">Area of your community within {{entry.name}}: {{entry.pct_area}}%</li>
+							<li class="pct-population district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_population">Population of your community within {{entry.name}}: {{entry.pct_population}}%</li>
 							<li class="contacts district-data-detail district-data-level-1" v-if="entry.contacts">
 								<ul>
 									<li class="contact-vcard" v-for="contact in entry.contacts">
