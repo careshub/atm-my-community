@@ -427,9 +427,6 @@
             geoids.push( item.geoid );
           });
 
-          // Toggle the "no results item."
-          $( "#geo-short-results-no-selection" ).toggle( 0 === geoids.length );
-
           // Refresh the directory results.
           directoryList.refresh( geoids );
         }

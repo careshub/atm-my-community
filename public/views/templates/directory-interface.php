@@ -21,7 +21,7 @@
 		<h4>Selected Areas</h4>
 		<ul id="geo-short-results" class="geo-short-results-list">
 			<li v-for="(item, index) in items"><input type="checkbox" v-bind:id="'geoidShort-'+item.geoid" checked="checked" name="geoShortResultsList" @click="deleteItem(item,index)"><label v-bind:for="'geoidShort-'+item.geoid">{{item.label}} <span class="icon-cross"></span></label></li>
-			<li id="geo-short-results-no-selection">Click the map or search for an address above to select areas.</li>
+			<li v-if="items.length == 0" id="geo-short-results-no-selection">Click the map or search for an address above to select areas.</li>
 		</ul>
 	</div>
 
