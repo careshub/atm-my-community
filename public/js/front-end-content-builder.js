@@ -376,6 +376,22 @@
             rendered.push( item.label );
           });
           return rendered.join(', ');
+        },
+      },
+    });
+
+    // A subcomponent that is used to output the contact list for a location.
+    Vue.component('contact-vcard', {
+      template: '#directory-item-vcard',
+      props: ['contact'],
+      computed: {
+        emailLink: function () {
+          var eml = this.contact.email;
+          if ( /@/.test( eml ) ) {
+            return 'mailto:' + eml;
+          } else {
+            return eml;
+          }
         }
       },
     });

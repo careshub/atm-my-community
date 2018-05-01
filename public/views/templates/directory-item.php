@@ -10,7 +10,7 @@
 		<div class="Grid-cell">
 			<div class="cell-liner">
 			    <ul class="district-data-items">
-					<li v-for="entry in location.district_data">
+					<li v-for="(entry, eindex) in location.district_data">
 						<h4 class="district-name">{{entry.name}}</h4>
 						<ul>
 							<li class="area district-data-detail district-data-level-1 icon-location" v-if="entry.area">{{entry.area}}</li>
@@ -20,16 +20,12 @@
 							<li class="pct-population district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_population">Population of your community within {{entry.name}}: {{entry.pct_population}}%</li>
 							<li class="contacts district-data-detail district-data-level-1" v-if="entry.contacts">
 								<ul>
-									<li class="contact-vcard" v-for="contact in entry.contacts">
-										<ul class="icon-address-book">
-											<li class="name district-data-detail" v-if="contact.name">{{contact.name}}<span class="party-affiliation" v-if="contact.party"> &ndash; {{contact.party}}</span></li>
-											<li class="title district-data-detail" v-if="contact.title">{{contact.title}}</li>
-											<li class="address district-data-detail" v-if="contact.address">{{contact.address}}</li>
-											<li class="phone district-data-detail" v-if="contact.phone">{{contact.phone}}</li>
-											<li class="email district-data-detail" v-if="contact.email"><a v-bind:href="'mailto:' + contact.email">{{contact.email}}</a></li>
-											<li class="website district-data-detail" v-if="contact.website"><a v-bind:href="contact.website" target="_blank">{{contact.website}}</a></li>
-										</ul>
-									</li>
+									<contact-vcard
+										v-for="(contact, cindex) in entry.contacts"
+										v-bind:contact="contact"
+										v-bind:key="entry.geoid + ':e' + eindex + ':c' + cindex"
+										v-bind:id="entry.geoid + '-e' + eindex + '-c' + cindex"
+									></contact-vcard>
 								</ul>
 							</li>
 						</ul>
@@ -39,4 +35,17 @@
 		</div>
 	</div>
 </section>
+</script>
+
+<script type="text/x-template" id="directory-item-vcard">
+	<li class="contact-vcard">
+		<ul class="icon-address-book">
+			<li class="name district-data-detail" v-if="contact.name">{{contact.name}}<span class="party-affiliation" v-if="contact.party"> &ndash; {{contact.party}}</span></li>
+			<li class="title district-data-detail" v-if="contact.title">{{contact.title}}</li>
+			<li class="address district-data-detail" v-if="contact.address">{{contact.address}}</li>
+			<li class="phone district-data-detail" v-if="contact.phone">{{contact.phone}}</li>
+			<li class="email district-data-detail" v-if="contact.email"><a v-bind:href="emailLink">{{contact.email}}</a></li>
+			<li class="website district-data-detail" v-if="contact.website"><a v-bind:href="contact.website" target="_blank">{{contact.website}}</a></li>
+		</ul>
+	</li>
 </script>
