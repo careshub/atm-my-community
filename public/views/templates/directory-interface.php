@@ -5,6 +5,7 @@
 		<input type="radio" id="ecpp_senate" name="geography_type" value="senate" autocomplete="off"><label for="ecpp_senate">Senate District</label>
 		<input type="radio" id="ecpp_house" name="geography_type" value="house" autocomplete="off"><label for="ecpp_house">House District</label>
 		<input type="radio" id="ecpp_congressional" name="geography_type" value="congressional" autocomplete="off"><label for="ecpp_congressional">Congressional District</label>
+		<input type="radio" id="ecpp_mu-extension" name="geography_type" value="mu-extension" autocomplete="off"><label for="ecpp_mu-extension">MU Extension Region</label>
 	</nav>
 
 	<?php // Location selector: map and address search box ?>

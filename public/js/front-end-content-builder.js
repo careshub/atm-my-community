@@ -15,36 +15,43 @@
         currentGeog: "county",
         geoid: [],
         geog: {
-        "county": {
-            geo_key: "050",
-            layer_ids: [4, 5],
-            layer_name: "county",
-            select_ids: [6, 7]
-        },
-        "school": {
-            geo_key: "970",
-            layer_ids: [24, 25],
-            layer_name: "school",
-            select_ids: [26, 27]
-        },
-        "senate": {
-            geo_key: "610",
-            layer_ids: [36, 37],
-            layer_name: "senate",
-            select_ids: [38, 39]
-        },
-        "house": {
-            geo_key: "620",
-            layer_ids: [32, 33],
-            layer_name: "house",
-            select_ids: [34, 35]
-        },
-        "congressional": {
-            geo_key: "500",
-            layer_ids: [40, 41],
-            layer_name: "congressional",
-            select_ids: [42, 43]
-        }}
+          "county": {
+              geo_key: "050",
+              layer_ids: [4, 5],
+              layer_name: "county",
+              select_ids: [6, 7]
+          },
+          "school": {
+              geo_key: "970",
+              layer_ids: [24, 25],
+              layer_name: "school",
+              select_ids: [26, 27]
+          },
+          "senate": {
+              geo_key: "610",
+              layer_ids: [36, 37],
+              layer_name: "senate",
+              select_ids: [38, 39]
+          },
+          "house": {
+              geo_key: "620",
+              layer_ids: [32, 33],
+              layer_name: "house",
+              select_ids: [34, 35]
+          },
+          "congressional": {
+              geo_key: "500",
+              layer_ids: [40, 41],
+              layer_name: "congressional",
+              select_ids: [42, 43]
+          },
+          "mu-extension": {
+              geo_key: "MUX",
+              layer_ids: [44, 45],
+              layer_name: "mu-extension",
+              select_ids: [46, 47]
+          }
+        }
     };
 
     /**
@@ -250,7 +257,7 @@
                     var dataId = feature.properties["GEOID"] || feature.properties["GeoID"];
 
                     // check if in Missouri and we have not already selected it
-                    if (/(^29|US29)/.test(dataId) && $.inArray(dataId, MCC.geoid) === -1) {
+                    if ($.inArray(dataId, MCC.geoid) === -1) {
                         MCC.geoid.push(dataId);
 
                         // add to filter panel
