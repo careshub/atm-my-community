@@ -151,47 +151,57 @@
             MCC.currentGeog = activeGeog;
             MCC.geoid = [];
 
-            // console.log( "before:", map );
-            // Add the map layer again to fetch the new boundaries.
-            addBoundaryLayer();
-            // console.log( "after:", map );
+            // Add the select layer again to fetch the new boundaries.
+            updateGeoSpecificLayers();
 
             // remove all selections
             layerSelect.setLayerDefs(resetSelection());
         }
 
+        // Adds or updates the layer used to show the boundaries for the currently selected geography.
         function addBoundaryLayer() {
             var service = "https://gis3.cares.missouri.edu/arcgis/rest/services/Dynamic/Boundary2016_ECI/MapServer";
 
             if (boundaryLayer) {
-                boundaryLayer.remove();
+              boundaryLayer.remove();
             }
 
-            // console.log( "layer ids", MCC.geog[MCC.currentGeog].select_ids );
             // add the boundary's selection layer
             boundaryLayer = L.esri.dynamicMapLayer({
-                url: service,
-                layers: MCC.geog[MCC.currentGeog].layer_ids,
-                layerDefs: resetSelection(),
-                format: "png32",
-                opacity: 1,
-                // position: 'front'
+              url: service,
+              layers: MCC.geog[MCC.currentGeog].layer_ids,
+              layerDefs: resetSelection(),
+              format: "png32",
+              opacity: 1,
+              position: 'back' // No idea if this is a valid parameter. Poor documentation on this.
             }).addTo(map);
+        }
+
+        // Adds or updates the layer used to show the outline of the currently selected geography.
+        function updateSelectLayer() {
+            var service = "https://gis3.cares.missouri.edu/arcgis/rest/services/Dynamic/Boundary2016_ECI/MapServer";
 
             if (layerSelect) {
-                layerSelect.remove();
+              layerSelect.remove();
             }
 
-            // console.log( "layer ids", MCC.geog[MCC.currentGeog].select_ids );
             // add the boundary's selection layer
             layerSelect = L.esri.dynamicMapLayer({
-                url: service,
-                layers: MCC.geog[MCC.currentGeog].select_ids,
-                layerDefs: resetSelection(),
-                format: "png32",
-                opacity: 1,
-                position: 'front'
+              url: service,
+              layers: MCC.geog[MCC.currentGeog].select_ids,
+              layerDefs: resetSelection(),
+              format: "png32",
+              opacity: 1,
+              position: 'front'
             }).addTo(map);
+        }
+
+        /*
+         * Load geography-specific boundary and selection-identifier layers.
+         */
+        function updateGeoSpecificLayers() {
+          addBoundaryLayer();
+          updateSelectLayer();
         }
 
         /**
@@ -199,7 +209,7 @@
          */
         function addMapLayers() {
 
-            addBoundaryLayer();
+            updateGeoSpecificLayers();
 
             // add a reference layer, only available 0-13 zoom levels. Move to shadowPane so it's on the top
             var refLayer = L.esri.tiledMapLayer({
@@ -236,8 +246,6 @@
                 .on(map)
                 .layers("visible:" + MCC.geog[MCC.currentGeog].select_ids.join(","))
                 .run(function (error, featureCollection) {
-                  // console.log( "error", error );
-                  // console.log( "featureCollection", featureCollection );
                     setSelectionDef(featureCollection, latLng);
                 });
         }
@@ -328,8 +336,6 @@
                 .within(MCC.bounds)
                 .where(q)
                 .run(function (error, featureCollection) {
-                  // console.log( "error", error );
-                  // console.log( "featureCollection", featureCollection );
                     callback = callback || $.noop;
                     callback(featureCollection);
                 });
