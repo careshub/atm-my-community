@@ -73,6 +73,14 @@
   content: "\e981";
 }
 
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
+
 .leaflet-map {
 	min-height: 550px;
     border: 1px solid #CCC;
@@ -91,6 +99,8 @@
 /* Control to choose a geography level */
 .geography-level-select {
 	margin: .4em 0 1em;
+	padding: 0;
+	border: none;
 }
 input[name="geography_type"] {
 	opacity: 0;
@@ -98,6 +108,7 @@ input[name="geography_type"] {
 	height: 1px;
 }
 input[name="geography_type"] + label {
+	margin-right: .4em;
 	padding: .4em 1em;
 	background-color: #e1e1e1;
 	border-bottom: 2px solid #ddd;
@@ -133,26 +144,12 @@ input[name="geography_type"]:checked + label {
 
 /* Selected geographies user-feedback */
 .geo-short-results-list {
-	list-style-type: none;
-	padding-left: 0;
     margin: 1em 0 2.5em;
 }
-.geo-short-results-list li {
-	display: inline-block;
-	margin-right: 1em;
+.geo-short-results-item {
+	margin-right: .4em;
 }
-.geo-short-results-list input[name="geoShortResultsList"] {
-	opacity: 0;
-	width: 1px;
-	height: 1px;
-}
-.geo-short-results-list input[name="geoShortResultsList"] + label {
-	padding: .4em 1em;
-	background-color: #e1e1e1;
-	border-bottom: 2px solid #ddd;
-	transition: all .2s;
-}
-.geo-short-results-list .icon-cross {
+.geo-short-results-item .icon-cross {
 	margin-left: .2em;
 	font-size: .8em;
 }
