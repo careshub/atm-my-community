@@ -77,6 +77,7 @@
         // get the statewide map extent
         MCC.bounds = map.getBounds();
         map.setMaxBounds(MCC.bounds);
+        var aTagId = "leaflet-control-zoom-to-mo";
 
         // add a custom 'zoom to Missouri' control on the map
         var moZoomControl = L.Control.extend({
@@ -87,6 +88,7 @@
                 var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
                 var aTag = L.DomUtil.create('a', 'leaflet-control-custom', container);
                 aTag.href = "#";
+                aTag.id = aTagId;
                 container.onclick = function (e) {
                     map.flyToBounds(MCC.bounds);
                     e.stopPropagation();
@@ -95,6 +97,11 @@
             },
         });
         map.addControl(new moZoomControl());
+
+        // Now add some accessibility attributes to our custom control.
+        $( "#" + aTagId ).attr("aria-label", "Zoom to Missouri");
+        $( "#" + aTagId ).attr("title", "Zoom to Missouri");
+        $( "#" + aTagId ).attr("role", "button");
 
         // add MCC density, boundary and reference map layers
         addMapLayers();
