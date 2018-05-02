@@ -102,6 +102,7 @@ input[name="geography_type"] + label {
 	background-color: #e1e1e1;
 	border-bottom: 2px solid #ddd;
 	transition: all .2s;
+	cursor: pointer;
 }
 input[name="geography_type"]:checked + label {
 	/*color: #f00;*/
