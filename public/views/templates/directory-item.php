@@ -4,7 +4,7 @@
 	<div class="Grid Grid--guttersXl Grid--full med-Grid--fit">
 		<div class="Grid-cell u-1of3">
 			<div class="cell-liner district_map_container">
-				<img v-for="(layer, lindex) in location.map_url" v-bind:src="layer" v-bind:alt="(lindex == 0 ) ? '' : 'Map showing location of current selection in relation to this ' + location.district_type">
+				<img v-for="(layer, lindex) in location.map_url" v-bind:src="layer" v-bind:alt="lindex ? '' : 'Map showing location of current selection in relation to this ' + location.district_type">
 			</div>
 		</div>
 		<div class="Grid-cell">
