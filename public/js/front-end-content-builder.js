@@ -9,8 +9,6 @@
         cssGeog: '.ecpp-geog',
         selectcssGeogID: 'filters-container-regions',
         selectcssGeogName: 'geography_type',
-        // filterGeog: '#filter-geography',
-        // filters: ["theme", "type", "affiliation"],
         igeog: 0,
         currentGeog: "county",
         geoid: [],
@@ -328,8 +326,8 @@
 
         /**
          * Query the boundary layer of selected GEOID to get a collection of features.
-        * @param {string} layerId - The ID of the layer to query
-        * @param {callbackRequest} callback - The function to execute after query has returned fetureCollection
+         * @param {string} layerId - The ID of the layer to query
+         * @param {callbackRequest} callback - The function to execute after query has returned fetureCollection
          */
         function queryFeatures(layerId, idList, callback) {
             var queryOption = {
@@ -395,9 +393,9 @@
         emailLink: function () {
           var eml = this.contact.email;
           if ( /@/.test( eml ) ) {
-            return 'mailto:' + eml;
+            return '<a href="mailto:' + eml + '">' + eml + '</a>';
           } else {
-            return eml;
+            return '<a href="' + eml + '" target="_blank">' + eml + '</a>';
           }
         }
       },
