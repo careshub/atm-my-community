@@ -452,6 +452,16 @@
 
           // Refresh the directory results.
           directoryList.refresh( geoids );
+
+          // Modify URL to reflect the current selection.
+          var urlParam;
+          if ( geoids.length ) {
+            urlParam = "?geoid=" + geoids.join(",");
+          } else {
+            // Remove the query args altogether.
+            urlParam = window.location.pathname;
+          }
+          window.history.pushState({}, document.title, urlParam);
         }
       },
       methods: {
@@ -480,6 +490,41 @@
           // Remove the item from the short list.
           this.items.splice(index, 1);
         }
+      },
+      mounted: function () {
+        /*
+         * When the short list is built on page load, check to see
+         * if a selection area has been passed as a url parameter arg.
+         * If yes, show the right info.
+         */
+        this.$nextTick(function () {
+          var geoidParam = getUrlParameter( "geoid" );
+          if ( geoidParam ) {
+            var passedIds = geoidParam.split(',');
+            /*
+             * First, set map to the correct geography type.
+             * This is done by checking to see what geography type the passed geoIDs are.
+             */
+            var prefix = passedIds[0].substr( 0, 3 );
+            $.each( MCC.geog, function(index, el){
+              if ( el.geo_key == prefix ) {
+                $("input[name='geography_type']").filter('[value='+index+']').prop('checked', true);
+                loadDataActiveGeog( index );
+                return false;
+              }
+            });
+
+            // Next, we select the items on the map, which will start the cascade for showing the directory items.
+            if ( layerSelect ) {
+              layerSelect.query()
+                .layer(MCC.geog[MCC.currentGeog].select_ids[0])
+                .where("GEOID IN ('" + passedIds.join("','") + "')")
+                .run(function (error, featureCollection, response) {
+                    setSelectionDef(featureCollection, false);
+              });
+            }
+          }
+        });
       }
     });
 
@@ -503,6 +548,17 @@
       }).then(function(result) {
         return result;
       });
+    }
+
+    /*
+     * Get the value for a url parameter key.
+     * E.g. for ?key=value, return value
+     */
+    function getUrlParameter( name ) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
   }
