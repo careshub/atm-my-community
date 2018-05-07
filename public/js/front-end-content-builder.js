@@ -280,13 +280,16 @@
 
                         // show a popup
                         if (latlng) {
-                            MCC.popup = L.popup({
-                                minWidth: 200,
-                                className: 'popup'
-                            })
-                                .setLatLng(latlng)
-                                .setContent('<h2>' + name + '</h2><p><a href="#atm-directory-list" class="more-link">View data</a></p>' )
-                                .openOn(map);
+                          var center = L.geoJSON(featureCollection).getBounds().getCenter();
+
+                          MCC.popup = L.popup({
+                              minWidth: 200,
+                              autoPan: false,
+                              className: 'popup'
+                          })
+                            .setLatLng(center)
+                            .setContent('<h2>' + name + '</h2><p><a href="#atm-directory-list" class="more-link">View data</a></p>' )
+                            .openOn(map);
                         }
                         inMissouri = true;
                     }
