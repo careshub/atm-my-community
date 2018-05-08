@@ -74,7 +74,7 @@
 
         // get the statewide map extent
         MCC.bounds = map.getBounds();
-        map.setMaxBounds(MCC.bounds);
+        map.setMaxBounds(MCC.bounds.pad(0.02));       // add 2% padding for popup
         var aTagId = "leaflet-control-zoom-to-mo";
 
         // add a custom 'zoom to Missouri' control on the map
