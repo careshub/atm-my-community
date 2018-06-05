@@ -165,7 +165,7 @@
 
         // Adds or updates the layer used to show the boundaries for the currently selected geography.
         function addBoundaryLayer() {
-            var service = "https://gis3.cares.missouri.edu/arcgis/rest/services/Dynamic/Boundary2016_ECI/MapServer";
+            var service = "https://gis3.cares.missouri.edu/arcgis/rest/services/Boundary/Current_MO/MapServer";
 
             if (boundaryLayer) {
               boundaryLayer.remove();
@@ -184,7 +184,7 @@
 
         // Adds or updates the layer used to show the outline of the currently selected geography.
         function updateSelectLayer() {
-            var service = "https://gis3.cares.missouri.edu/arcgis/rest/services/Dynamic/Boundary2016_ECI/MapServer";
+            var service = "https://gis3.cares.missouri.edu/arcgis/rest/services/Boundary/Current_MO/MapServer";
 
             if (layerSelect) {
               layerSelect.remove();
@@ -334,7 +334,7 @@
          */
         function queryFeatures(layerId, idList, callback) {
             var queryOption = {
-                url: "https://gis3.cares.missouri.edu/arcgis/rest/services/Dynamic/Boundary2016_ECI/MapServer",
+                url: "https://gis3.cares.missouri.edu/arcgis/rest/services/Boundary/Current_MO/MapServer",
                 useCors: true
             };
 
