@@ -198,8 +198,19 @@ input[name="geography_type"]:checked + label {
 .district-data-items li:first-child .district-name {
 	margin-top: 0;
 }
+
+.district-data-items li:not(:first-child) {
+    display: none;
+}
+.all-items li:not(:first-child) {
+    display: block;
+}
+.district-data-items li.district-data-detail {
+    display: block;
+}
+
 .district-name {
-	margin-bottom: .5em;
+    margin-bottom: .5em;
 }
 #atm-directory-list .district-data-items .contacts .contact-vcard {
 	padding-left: 0;

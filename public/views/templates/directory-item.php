@@ -31,6 +31,9 @@
 						</ul>
 					</li>
 				</ul>
+
+				<button v-if="location.district_data.length > 1" type="button" class="geo-short-results-item"
+				aria-pressed="false" aria-label="Show more or less items" title="Show more or less items">Show More</button>
 			</div>
 		</div>
 	</div>

@@ -431,6 +431,25 @@
             .then( function(result) {
                 vm.locations = result;
                 vm.loading = false;
+
+                // attach button click handler after contents are rendered.				
+                setTimeout(function () {
+                    $(".district-data-items").each(function () {
+                        var $list = $(this);
+                        var $btn = $list.siblings("button");
+                        if ($btn) {
+                            $btn.off("click");
+                            $btn.on("click", function (e) {
+                                if (/Less$/.test($btn.html())) {
+                                    $btn.html("Show More");
+                                } else {
+                                    $btn.html("Show Less");
+                                }
+                                $list.toggleClass("all-items");
+                            });
+                        }
+                    });
+                }, 2000);
             });
         }
       }
