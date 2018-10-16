@@ -442,6 +442,11 @@
                             $btn.on("click", function (e) {
                                 if (/Less$/.test($btn.html())) {
                                     $btn.html("Show More");
+									
+									// scroll back up so we won't be looking at the bottom of page
+									$('html, body').stop().animate({ 
+										scrollTop: $list.offset().top
+									}, 500);
                                 } else {
                                     $btn.html("Show Less");
                                 }
