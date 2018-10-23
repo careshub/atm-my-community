@@ -209,9 +209,6 @@ input[name="geography_type"]:checked + label {
 .district-data-items li.district-data-detail {
     display: block;
 }
-.data-toggle {
-	margin-left: 1.25em;
-}
 
 =======
 >>>>>>> parent of dda4a1f... Add 'Show More' button for toggle display of 1 or more items.
