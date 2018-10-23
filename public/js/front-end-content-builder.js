@@ -375,6 +375,7 @@
       props: {
         'location': Object
       },
+      // This is a data item instead of a prop so that the sibling instances can be independent.
       data: function () {
         return {
           expanded: false
@@ -391,11 +392,26 @@
             rendered.push( item.label );
           });
           return rendered.join(', ');
+        },
+        sectionID: function () {
+          // Clean up string for use as attribute.
+          return this.location.district_type.replace(/\s+/g,"-").replace(/[\(\)]/g,"");
         }
       },
       methods: {
         processExpand: function() {
-            this.expanded = !this.expanded;
+            var vm = this;
+            // If the list is currently expanded, scroll back up so we won't
+            // be looking at the bottom of page when it shrinks.
+            if ( vm.expanded ) {
+              $('html').stop().animate({
+                scrollTop: $( "#" + vm.$el.id ).offset().top - 100
+              }, 500, function() {
+                vm.expanded = !vm.expanded;
+              });
+            } else {
+              vm.expanded = !vm.expanded;
+            }
         }
       }
     });
@@ -407,20 +423,8 @@
         'entry': Object,
         'eindex': Number,
         'hasMultiple': Boolean,
-        'totalEntries': Number
-      },
-      data: function () {
-        return {
-          expanded: false
-        }
-      },
-      methods: {
-        expandList: function() {
-          // The local expanded data is used to change the text on the button.
-          this.expanded = !this.expanded;
-          // Pass the event up to the parent component.
-          this.$emit('expandDistrictDataList');
-        }
+        'totalEntries': Number,
+        'listExpanded': Boolean // This is inherited from the directory-item component.
       }
     });
 

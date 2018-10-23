@@ -1,5 +1,5 @@
 <script type="text/x-template" id="directory-item-template">
-<section>
+<section v-bind:id="sectionID">
 	<h3 class="district-type">{{location.district_type}}</h3>
 	<div class="Grid Grid--guttersXl Grid--full med-Grid--fit">
 		<div class="Grid-cell u-1of3">
@@ -18,8 +18,9 @@
 						v-bind:hasMultiple="location.district_data.length > 1"
 						v-bind:totalEntries="location.district_data.length"
 						v-bind:key="entry.geoid + ':e' + eindex"
+						v-bind:id="entry.geoid + '-e' + eindex"
 						v-show="0==eindex || expanded"
-						v-bind:expanded="expanded"
+						v-bind:listExpanded="expanded"
 						v-on:expandDistrictDataList="processExpand"
 					></li>
 				</ul>
@@ -51,7 +52,7 @@
 			</ul>
 		</li>
 	</ul>
-	<button class="show-list-button" v-if="hasMultiple && (0 === eindex)" v-on:click='expandList'><span v-if="expanded">Show fewer</span><span v-else>Show More</span></button>
+	<button class="show-list-button" v-if="hasMultiple && (0 === eindex || eindex === totalEntries - 1)" v-on:click='$emit("expandDistrictDataList")'><span v-if="listExpanded">Show fewer</span><span v-else>Show More</span></button>
 </li>
 </script>
 
