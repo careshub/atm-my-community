@@ -233,3 +233,6 @@ input[name="geography_type"]:checked + label {
 	left: 0;
 	background-color: rgb( 255, 255, 255, 0.5 );
 }
+.show-list-button {
+  margin-top: .6em;
+}

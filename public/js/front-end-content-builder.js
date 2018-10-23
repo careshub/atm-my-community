@@ -372,7 +372,14 @@
     // Add a new Vue component for directory items.
     Vue.component('directory-item', {
       template: '#directory-item-template',
-      props: ['location'],
+      props: {
+        'location': Object
+      },
+      data: function () {
+        return {
+          expanded: false
+        }
+      },
       computed: {
         // a computed getter
         selectedArea: function () {
@@ -384,8 +391,37 @@
             rendered.push( item.label );
           });
           return rendered.join(', ');
-        },
+        }
       },
+      methods: {
+        processExpand: function() {
+            this.expanded = !this.expanded;
+        }
+      }
+    });
+
+    // A subcomponent that is used to output the contact list for a location.
+    Vue.component('district-data-item', {
+      template: '#district-data-item-template',
+      props: {
+        'entry': Object,
+        'eindex': Number,
+        'hasMultiple': Boolean,
+        'totalEntries': Number
+      },
+      data: function () {
+        return {
+          expanded: false
+        }
+      },
+      methods: {
+        expandList: function() {
+          // The local expanded data is used to change the text on the button.
+          this.expanded = !this.expanded;
+          // Pass the event up to the parent component.
+          this.$emit('expandDistrictDataList');
+        }
+      }
     });
 
     // A subcomponent that is used to output the contact list for a location.
@@ -409,7 +445,7 @@
       el: '#atm-directory-list',
       data: {
         locations: [],
-        loading: false,
+        loading: false
       },
       methods: {
         refresh: function ( geoids ) {
