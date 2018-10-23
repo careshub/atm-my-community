@@ -31,9 +31,12 @@
 						</ul>
 					</li>
 				</ul>
+<<<<<<< HEAD
 
 				<button v-if="location.district_data.length > 1" type="button" class="data-toggle"
 				aria-pressed="false" aria-label="Show more or less items" title="Show more or less items">Show More</button>
+=======
+>>>>>>> parent of dda4a1f... Add 'Show More' button for toggle display of 1 or more items.
 			</div>
 		</div>
 	</div>

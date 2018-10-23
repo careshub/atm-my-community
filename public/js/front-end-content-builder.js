@@ -431,6 +431,7 @@
             .then( function(result) {
                 vm.locations = result;
                 vm.loading = false;
+<<<<<<< HEAD
 
                 // attach button click handler after contents are rendered.				
                 setTimeout(function () {
@@ -455,6 +456,8 @@
                         }
                     });
                 }, 2000);
+=======
+>>>>>>> parent of dda4a1f... Add 'Show More' button for toggle display of 1 or more items.
             });
         }
       }

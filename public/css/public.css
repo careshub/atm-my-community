@@ -198,6 +198,7 @@ input[name="geography_type"]:checked + label {
 .district-data-items li:first-child .district-name {
 	margin-top: 0;
 }
+<<<<<<< HEAD
 
 .district-data-items li:not(:first-child) {
     display: none;
@@ -212,8 +213,10 @@ input[name="geography_type"]:checked + label {
 	margin-left: 1.25em;
 }
 
+=======
+>>>>>>> parent of dda4a1f... Add 'Show More' button for toggle display of 1 or more items.
 .district-name {
-    margin-bottom: .5em;
+	margin-bottom: .5em;
 }
 #atm-directory-list .district-data-items .contacts .contact-vcard {
 	padding-left: 0;
