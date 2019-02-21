@@ -89,6 +89,11 @@
 	position: relative;
 }
 
+.leaflet-touch .leaflet-control-zoom-in,
+.leaflet-touch .leaflet-control-zoom-out,
+.leaflet-touch .leaflet-control-custom {
+  text-decoration: none;
+}
 .atm-my-community-location-map .leaflet-control-custom {
     background-image: url(../images/mo.png);
     background-color: #f1b82d;
