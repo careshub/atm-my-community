@@ -65,5 +65,5 @@ function get_plugin_slug() {
  * @return string Current version of plugin.
  */
 function get_plugin_version() {
-	return '1.0.1';
+	return '1.0.2';
 }

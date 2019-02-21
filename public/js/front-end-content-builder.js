@@ -438,8 +438,15 @@
           if ( /@/.test( eml ) ) {
             return '<a href="mailto:' + eml + '">' + eml + '</a>';
           } else {
-            return '<a href="' + eml + '" target="_blank">' + eml + '</a>';
+            var text = this.contact.name || this.contact.title;
+            return '<a href="' + eml + '" target="_blank"> Contact ' + text + '</a>';
           }
+        },
+        webLink: function () {
+          var ws = this.contact.website,
+              text = this.contact.name || this.contact.title;
+
+          return '<a href="' + ws + '" target="_blank">Visit web site for ' + text + '</a>';
         }
       },
     });

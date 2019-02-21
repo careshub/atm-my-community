@@ -64,7 +64,7 @@
 			<li class="address district-data-detail" v-if="contact.address">{{contact.address}}</li>
 			<li class="phone district-data-detail" v-if="contact.phone">{{contact.phone}}</li>
 			<li class="email district-data-detail" v-if="contact.email" v-html="emailLink"></li>
-			<li class="website district-data-detail" v-if="contact.website"><a v-bind:href="contact.website" target="_blank">{{contact.website}}</a></li>
+			<li class="website district-data-detail" v-if="contact.website" v-html="webLink"></li>
 		</ul>
 	</li>
 </script>
