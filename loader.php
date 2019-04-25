@@ -32,6 +32,7 @@ require_once( $basepath . 'public/public.php' );
 
 // The shortcode handlers and template loaders.
 require_once( $basepath . 'public/views/class-gamajo-template-loader.php' );
+require_once( $basepath . 'public/views/class-my-community-template-loader.php' );
 require_once( $basepath . 'public/views/views.php' );
 
 /**

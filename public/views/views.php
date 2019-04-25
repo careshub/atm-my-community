@@ -28,7 +28,7 @@ function my_community_shortcode( $atts, $content ) {
 	// Enqueue Script that runs this screen.
 	wp_enqueue_script( 'atm-front-end-content-builder' );
 
-	$templates = new Gamajo_Template_Loader;
+	$templates = new MU_My_Community_Template_Loader;
 
 	ob_start();
 
