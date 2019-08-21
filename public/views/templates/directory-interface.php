@@ -1,13 +1,12 @@
 <div>
-	<fieldset class="geography-level-select" id="filters-container-regions">
-		<legend class="visuallyhidden">Choose what type of geography you wish to select an area by</legend>
-		<input type="radio" id="ecpp_county" class="visuallyhidden" name="geography_type" value="county" checked="checked" autocomplete="off"><label for="ecpp_county">County</label>
-		<input type="radio" id="ecpp_school" class="visuallyhidden" name="geography_type" value="school" autocomplete="off"><label for="ecpp_school">School District</label>
-		<input type="radio" id="ecpp_senate" class="visuallyhidden" name="geography_type" value="senate" autocomplete="off"><label for="ecpp_senate">Senate District</label>
-		<input type="radio" id="ecpp_house" class="visuallyhidden" name="geography_type" value="house" autocomplete="off"><label for="ecpp_house">House District</label>
-		<input type="radio" id="ecpp_congressional" class="visuallyhidden" name="geography_type" value="congressional" autocomplete="off"><label for="ecpp_congressional">Congressional District</label>
-		<input type="radio" id="ecpp_mu-extension" class="visuallyhidden" name="geography_type" value="mu-extension" autocomplete="off"><label for="ecpp_mu-extension">MU Extension Region</label>
-	</fieldset>
+	<div id="geography-select">
+		<fieldset class="geography-level-select" id="filters-container-regions">
+			<legend class="visuallyhidden">Choose what type of geography you wish to select an area by</legend>
+			<template v-for="(item, index) in items">
+				<input type="radio" v-bind:id="'ecpp_'+item.geo_key" class="visuallyhidden" name="geography_type" v-bind:checked="0 === index" v-bind:value="index" autocomplete="off"><label v-bind:for="'ecpp_'+item.geo_key">{{item.layer_name}}</label>
+			</template>
+		</fieldset>
+	</div>
 
 	<?php // Location selector: map and address search box ?>
 	<div class="atm-my-community-location-map">
