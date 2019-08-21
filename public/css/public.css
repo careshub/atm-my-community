@@ -1,89 +1,89 @@
 @font-face {
-  font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?z6eqm6');
-  src:  url('../fonts/icomoon.eot?z6eqm6#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?z6eqm6') format('truetype'),
-    url('../fonts/icomoon.woff?z6eqm6') format('woff'),
-    url('../fonts/icomoon.svg?z6eqm6#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'icomoon';
+	src:  url('../fonts/icomoon.eot?z6eqm6');
+	src:  url('../fonts/icomoon.eot?z6eqm6#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?z6eqm6') format('truetype'),
+		url('../fonts/icomoon.woff?z6eqm6') format('woff'),
+		url('../fonts/icomoon.svg?z6eqm6#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  color: #333;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	color: #333;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
 
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .icon-address-book:before {
-  content: "\e944";
+	content: "\e944";
 }
 .icon-location:before {
-  content: "\e947";
+	content: "\e947";
 }
 .icon-bell:before {
-  content: "\e951";
+	content: "\e951";
 }
 .icon-users:before {
-  content: "\e972";
+	content: "\e972";
 }
 .icon-search:before {
-  content: "\e986";
+	content: "\e986";
 }
 .icon-stats-bars:before {
-  content: "\e99c";
+	content: "\e99c";
 }
 .icon-stats-bars2:before {
-  content: "\e99d";
+	content: "\e99d";
 }
 .icon-rocket:before {
-  content: "\e9a5";
+	content: "\e9a5";
 }
 .icon-meter:before {
-  content: "\e9a6";
+	content: "\e9a6";
 }
 .icon-meter2:before {
-  content: "\e9a7";
+	content: "\e9a7";
 }
 .icon-cross:before {
-  content: "\ea0f";
-  color: maroon;
+	content: "\ea0f";
+	color: maroon;
 }
 .icon-radio-checked:before {
-  content: "\ea54";
+	content: "\ea54";
 }
 .icon-radio-checked2:before {
-  content: "\ea55";
+	content: "\ea55";
 }
 .icon-radio-unchecked:before {
-  content: "\ea56";
+	content: "\ea56";
 }
 .icon-spinner8:before {
-  content: "\e981";
+	content: "\e981";
 }
 
 .visuallyhidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px; width: 1px;
-  margin: -1px; padding: 0; border: 0;
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	height: 1px; width: 1px;
+	margin: -1px; padding: 0; border: 0;
 }
 
 .leaflet-map {
 	min-height: 550px;
-    border: 1px solid #CCC;
+		border: 1px solid #CCC;
 }
 .atm-my-community-location-map {
 	position: relative;
@@ -92,13 +92,13 @@
 .leaflet-touch .leaflet-control-zoom-in,
 .leaflet-touch .leaflet-control-zoom-out,
 .leaflet-touch .leaflet-control-custom {
-  text-decoration: none;
+	text-decoration: none;
 }
 .atm-my-community-location-map .leaflet-control-custom {
-    background-image: url(../images/mo.png);
-    background-color: #f1b82d;
-    background-position: center;
-    background-repeat: no-repeat;
+		background-image: url(../images/mo.png);
+		background-color: #f1b82d;
+		background-position: center;
+		background-repeat: no-repeat;
 }
 
 /* Control to choose a geography level */
@@ -113,10 +113,10 @@ input[name="geography_type"] {
 	height: 1px;
 }
 input[name="geography_type"] + label {
-  display: inline-block;
+	display: inline-block;
 	margin-right: .4em;
-  margin-bottom: .4em;
-  padding: .4em 1em;
+	margin-bottom: .4em;
+	padding: .4em 1em;
 	background-color: #e1e1e1;
 	border-bottom: 2px solid #ddd;
 	transition: all .2s;
@@ -131,20 +131,20 @@ input[name="geography_type"]:checked + label {
 
 /* Address search box */
 #address-search-form {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 500;
-    max-width:75%;
-    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);*/
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 500;
+		max-width:75%;
+		/*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);*/
 }
 #address-input {
-    background-image: url(../images/search-gray.png);
-    /*background-color: #f1b82d;*/
-    background-position: center right 4%;
-    background-repeat: no-repeat;
-    background-size: 1.4em auto;
-    padding-right: 2.4em;
+		background-image: url(../images/search-gray.png);
+		/*background-color: #f1b82d;*/
+		background-position: center right 4%;
+		background-repeat: no-repeat;
+		background-size: 1.4em auto;
+		padding-right: 2.4em;
 }
 .search-submit-button {
 	display: none;
@@ -152,11 +152,11 @@ input[name="geography_type"]:checked + label {
 
 /* Selected geographies user-feedback */
 .geo-short-results-list {
-    margin: 1em 0 2.5em;
+		margin: 1em 0 2.5em;
 }
 .geo-short-results-item {
 	margin-right: .4em;
-  margin-bottom: .4em;
+	margin-bottom: .4em;
 }
 .geo-short-results-item .icon-cross {
 	margin-left: .2em;
@@ -182,7 +182,7 @@ input[name="geography_type"]:checked + label {
 #atm-directory-list ul {
 	list-style-type: none;
 	padding-left: 0;
-    margin-left: 0;
+		margin-left: 0;
 }
 #atm-directory-list ul li {
 	padding-left: 1.6em;
@@ -197,8 +197,8 @@ input[name="geography_type"]:checked + label {
 }
 .district-data-items [class^="icon-"]:before,
 .district-data-items [class*=" icon-"]:before {
-    margin-right: .5em;
-    margin-left: -1.6em;
+		margin-right: .5em;
+		margin-left: -1.6em;
 }
 .district-data-items li:first-child .district-name {
 	margin-top: 0;
@@ -225,5 +225,5 @@ input[name="geography_type"]:checked + label {
 	background-color: rgb( 255, 255, 255, 0.5 );
 }
 .show-list-button {
-  margin-top: .6em;
+	margin-top: .6em;
 }
