@@ -3,7 +3,7 @@
 		<fieldset class="geography-level-select" id="filters-container-regions">
 			<legend class="visuallyhidden">Choose what type of geography you wish to select an area by</legend>
 			<template v-for="(item, index) in items">
-				<input type="radio" v-bind:id="'ecpp_'+item.geo_key" class="visuallyhidden" name="geography_type" v-bind:checked="0 === index" v-bind:value="index" autocomplete="off"><label v-bind:for="'ecpp_'+item.geo_key">{{item.layer_name}}</label>
+				<input type="radio" v-bind:id="'ecpp_'+item.geo_key" class="visuallyhidden" name="geography_type" v-bind:checked="0 === index" v-bind:value="index" autocomplete="off" v-model="selectedGeography"><label v-bind:for="'ecpp_'+item.geo_key">{{item.layer_name}}</label>
 			</template>
 		</fieldset>
 	</div>

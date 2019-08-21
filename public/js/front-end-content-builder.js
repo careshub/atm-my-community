@@ -9,7 +9,6 @@
 			selectcssGeogID: 'filters-container-regions',
 			selectcssGeogName: 'geography_type',
 			igeog: 0,
-			currentGeog: 0,
 			geoid: [],
 			// Geog will be updated via an AJAX call. These values are placeholders.
 			geog:[
@@ -77,8 +76,8 @@
 					MCC.geog = response;
 				}
 				// Now we can load the map and Vue elements.
-				initializeMap();
 				initializeVueElements();
+				initializeMap();
 		});
 		}
 
@@ -155,9 +154,8 @@
 			if ( MCC.popup ) {
 				MCC.popup.remove();
 			}
-
 			// Is this a change? If not, do nothing.
-			if ( activeGeog === MCC.currentGeog ) {
+			if ( activeGeog === geoSelector.selectedGeography ) {
 				return;
 			}
 
@@ -168,7 +166,6 @@
 				delete MCC.selectionBounds;
 			}
 			// now set up new geography layers
-			MCC.currentGeog = activeGeog;
 			MCC.geoid = [];
 
 			// Add the select layer again to fetch the new boundaries.
@@ -189,7 +186,7 @@
 			// add the boundary's selection layer
 			boundaryLayer = L.esri.dynamicMapLayer({
 				url: service,
-				layers: MCC.geog[MCC.currentGeog].layer_ids,
+				layers: MCC.geog[geoSelector.selectedGeography].layer_ids,
 				layerDefs: resetSelection(),
 				format: "png32",
 				opacity: 1,
@@ -208,7 +205,7 @@
 			// add the boundary's selection layer
 			layerSelect = L.esri.dynamicMapLayer({
 				url: service,
-				layers: MCC.geog[MCC.currentGeog].select_ids,
+				layers: MCC.geog[geoSelector.selectedGeography].select_ids,
 				layerDefs: resetSelection(),
 				format: "png32",
 				opacity: 1,
@@ -260,11 +257,12 @@
 		 * @param {any} latLng - The point location on map to select geography for.
 		 */
 		function selectFeature(latLng) {
+
 			// get census tract number
 			layerSelect.identify()
 				.at(latLng)
 				.on(map)
-				.layers("visible:" + MCC.geog[MCC.currentGeog].select_ids.join(","))
+				.layers("visible:" + MCC.geog[geoSelector.selectedGeography].select_ids.join(","))
 				.run(function (error, featureCollection) {
 						setSelectionDef(featureCollection, latLng);
 				});
@@ -275,7 +273,7 @@
 		 * @param {any} [featureCollection] - The list of features found at mouse click on the map
 		 */
 		function setSelectionDef(featureCollection, latlng) {
-			var activeGeog = MCC.geog[MCC.currentGeog];
+			var activeGeog = MCC.geog[geoSelector.selectedGeography];
 
 			// get selected GEOID
 			if (featureCollection && featureCollection.features.length > 0) {
@@ -471,7 +469,8 @@
 		geoSelector = new Vue({
 			el: '#filters-container-regions',
 			data: {
-				items: MCC.geog
+				items: MCC.geog,
+				selectedGeography: 0,
 			},
 			mounted: function () {
 				this.$nextTick(function () {
@@ -560,7 +559,7 @@
 						delete MCC.selectionBounds;
 						map.flyToBounds(MCC.bounds);
 					} else {
-						var layerId = MCC.geog[MCC.currentGeog].select_ids[1];
+						var layerId = MCC.geog[geoSelector.selectedGeography].select_ids[1];
 						queryFeatures(layerId, MCC.geoid, function (featureCollection) {
 							var geojson = L.geoJSON(featureCollection);
 							MCC.selectionBounds = geojson.getBounds();
@@ -602,7 +601,7 @@
 						// Next, we select the items on the map, which will start the cascade for showing the directory items.
 						if ( layerSelect ) {
 							layerSelect.query()
-								.layer(MCC.geog[MCC.currentGeog].select_ids[0])
+								.layer(MCC.geog[geoSelector.selectedGeography].select_ids[0])
 								.where("GEOID IN ('" + passedIds.join("','") + "')")
 								.run(function (error, featureCollection, response) {
 										setSelectionDef(featureCollection, false);
