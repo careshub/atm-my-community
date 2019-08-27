@@ -102,6 +102,64 @@
 }
 
 /* Control to choose a geography level */
+
+.geography-level-select .main-geogs {
+  display: flex;
+}
+.geography-level-select ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.geography-level-select .main-geogs > li {
+  flex-grow: 1;
+  white-space: nowrap;
+}
+.geography-level-select.calculating .main-geogs > li {
+  flex-grow: 0;
+}
+.geography-level-select {
+  position: relative;
+  width: 100%;
+}
+.geography-level-select .more-geographies {
+	/*display: none;*/
+}
+.geography-level-select.enable-more .more-geographies {
+	/*display: list-item;*/
+}
+.geography-level-select .more-geographies-list {
+  /*visibility: hidden;*/
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 750;
+  background-color: #FAFAFA;
+}
+.geography-level-select.show-secondary .more-geographies-list {
+  /*visibility: visible;*/
+  /*background-color: #FAFAFA;*/
+}
+.geography-level-select.show-secondary .more-geographies > button {
+  background-color: rgb(55, 55, 55);;
+}
+
+.geography-level-select .more-geographies-list li {
+	/*margin-right: 0;*/
+	/*margin-bottom: 0;*/
+}
+.geography-level-select .more-geographies-list li label{
+	/*margin-right: 0;*/
+	/*margin-bottom: 0;*/
+	display: block;
+	border-bottom-color: #aaa;
+}
+
+.more-geographies-list input[name="geography_type"] + label {
+	width: 100%;
+}
+
+
 .geography-level-select {
 	margin: .4em 0 1em;
 	padding: 0;
@@ -113,9 +171,12 @@ input[name="geography_type"] {
 	height: 1px;
 }
 input[name="geography_type"] + label {
+	text-align: center;
 	display: inline-block;
-	margin-right: .4em;
-	margin-bottom: .4em;
+	width: 96%;
+	overflow: auto;
+	/*margin-right: .4em;*/
+	/*margin-bottom: .4em;*/
 	padding: .4em 1em;
 	background-color: #e1e1e1;
 	border-bottom: 2px solid #ddd;
@@ -126,6 +187,12 @@ input[name="geography_type"]:checked + label {
 	/*color: #f00;*/
 	/*font-weight: 700;*/
 	background-color: #f1f1f1;
+	border-bottom: 2px solid #f1b82d;
+}
+.geography-level-select .more-geographies > button {
+	width: 100%;
+	padding: .4em 1em;
+	font-size: 1.0625rem;
 	border-bottom: 2px solid #f1b82d;
 }
 

@@ -154,10 +154,6 @@
 			if ( MCC.popup ) {
 				MCC.popup.remove();
 			}
-			// Is this a change? If not, do nothing.
-			if ( activeGeog === geoSelector.selectedGeography ) {
-				return;
-			}
 
 			// zoom out to state extent
 			map.flyToBounds(MCC.bounds);
@@ -465,26 +461,101 @@
 		});
 
 	function initializeVueElements() {
+
 		// The geography selector above the map.
 		geoSelector = new Vue({
 			el: '#filters-container-regions',
 			data: {
 				items: MCC.geog,
 				selectedGeography: 0,
+				toggledMore: false,
+			},
+			computed: {
+				// a computed getter
+				enableMore: function () {
+					for (var i = 0; i < this.items.length; i++) {
+						if ( undefined !== this.items[i].nav && "more" === this.items[i].nav ) {
+							return true;
+						}
+					}
+					return false;
+				}
+			},
+			beforeMount: function() {
+				// Add all items to the "primary" nav when loading.
+				for ( var i = 0; i < this.items.length; i++ ) {
+					Vue.set( this.items[i], "nav", "primary" );
+				}
 			},
 			mounted: function () {
 				this.$nextTick(function () {
-					// attach top geography bar button click event handler
-					$('input[name="' + MCC.selectcssGeogName + '"]').change(function(e) { // Select the radio input group
+					var vm = this;
+					/*
+					 * Add a "more" nav inspired by: https://css-tricks.com/container-adapting-tabs-with-more-button/
+					 * On load and page resize, this will measure the items and move those that won't fit to a "more" menu.
+					 */
+					const container = $( ".geography-level-select" );
+					$( ".more-geographies > button" ).on( 'click', function( e ) {
+						e.preventDefault();
+						geoSelector.toggledMore = ! geoSelector.toggledMore;
+					} );
+
+					this.doResize();
+					window.addEventListener( "resize", debounce( geoSelector.doResize, 350 ) );
+
+					// Listen for "off" clicks when the "more" nav is open
+					document.addEventListener('click', function (event) {
+						if ( ! geoSelector.toggledMore ) {
+							return;
+						}
+
+						const moreGeosContainer = document.getElementById( 'more-geographies-container' );
+						let el = event.target
+						while( el ) {
+							if ( el === moreGeosContainer ) {
+								return;
+							}
+							el = el.parentNode
+						}
+
+						// Close the drop down menu.
+						geoSelector.toggledMore = false;
+					}, false);
+				});
+			},
+			watch: {
+				// whenever the selectedGeography changes, this function will run
+				selectedGeography: function ( geo ) {
 						// Clear selected areas.
 						shortGeoList.items = [];
 
-						// $(this).val() returns the value of the checked radio button
-						// which triggered the event.
-						loadDataActiveGeog( $(this).val() );
-					});
-				});
-			}
+						loadDataActiveGeog( geo );
+				}
+			},
+			methods: {
+				doResize: function (element, index) {
+					// Unset flex-grow so we can get accurate measurements.
+					$( ".geography-level-select" ).addClass( "calculating" );
+
+					let stopWidth    = $( ".more-geographies > button" ).width();
+					let primaryWidth = $( ".entry-content" ).width();
+
+					for ( var i = 0; i < geoSelector.items.length; i++ ) {
+						Vue.set( geoSelector.items[i], "nav", "primary" );
+					}
+
+					for (var i = 0; i < geoSelector.items.length; i++) {
+						if ( primaryWidth >= stopWidth + $( "#geo_li_" + geoSelector.items[i].geo_key ).width() ) {
+							stopWidth += $( "#geo_li_" + geoSelector.items[i].geo_key ).width();
+						} else {
+							Vue.set( geoSelector.items[i], "nav", "more" );
+						}
+					}
+
+					// Reenable flex-grow because it looks nicer.
+					$( ".geography-level-select" ).removeClass( "calculating" );
+				}
+			},
 		});
 
 		// Initialize the directory list
@@ -645,4 +716,27 @@
 		var results = regex.exec(location.search);
 		return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 	}
+
+	/*
+	 * Returns a function, that, as long as it continues to be invoked, will not
+	 * be triggered. The function will be called after it stops being called for
+	 * N milliseconds. If `immediate` is passed, trigger the function on the
+	 * leading edge, instead of the trailing.
+	 * http://davidwalsh.name/javascript-debounce-function
+	 */
+	function debounce(func, wait, immediate) {
+		var timeout;
+		return function() {
+			var context = this, args = arguments;
+			var later = function() {
+				timeout = null;
+				if (!immediate) func.apply(context, args);
+			};
+			var callNow = immediate && !timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+			if (callNow) func.apply(context, args);
+		};
+	};
+
 }(jQuery));

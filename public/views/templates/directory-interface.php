@@ -2,9 +2,19 @@
 	<div id="geography-select">
 		<fieldset class="geography-level-select" id="filters-container-regions">
 			<legend class="visuallyhidden">Choose what type of geography you wish to select an area by</legend>
-			<template v-for="(item, index) in items">
-				<input type="radio" v-bind:id="'ecpp_'+item.geo_key" class="visuallyhidden" name="geography_type" v-bind:checked="0 === index" v-bind:value="index" autocomplete="off" v-model="selectedGeography"><label v-bind:for="'ecpp_'+item.geo_key">{{item.layer_name}}</label>
-			</template>
+			<ul id="mc-main-geogs" class="main-geogs">
+				<li v-for="(item, index) in items" v-if="'primary' == item.nav" v-bind:id="'geo_li_'+item.geo_key">
+						<input type="radio" v-bind:id="'ecpp_'+item.geo_key" class="visuallyhidden" name="geography_type" v-bind:checked="0 === index" v-bind:value="index" autocomplete="off" v-model="selectedGeography"><label v-bind:for="'ecpp_'+item.geo_key">{{item.layer_name}}</label>
+				</li>
+				<li v-bind:style="{visibility: enableMore ? 'visible' : 'hidden'}" class="more-geographies" id="more-geographies-container">
+					<button type="button" aria-haspopup="true" v-bind:aria-expanded="toggledMore ? 'true' : 'false'">More &vellip;</button>
+					<ul v-bind:style="{visibility: toggledMore ? 'visible' : 'hidden'}" id="mc-more-geogs" class="more-geographies-list">
+						<li v-for="(item, index) in items" v-if="'more' === item.nav" v-bind:id="'geo_li_'+item.geo_key">
+							<input type="radio" v-bind:id="'ecpp_'+item.geo_key" class="visuallyhidden" name="geography_type" v-bind:checked="0 === index" v-bind:value="index" autocomplete="off" v-model="selectedGeography"><label v-bind:for="'ecpp_'+item.geo_key">{{item.layer_name}}</label>
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</fieldset>
 	</div>
 
