@@ -521,6 +521,36 @@
 						// Close the drop down menu.
 						geoSelector.toggledMore = false;
 					}, false);
+
+					/*
+					 * When built on page load, check to see
+					 * if a selection area has been passed as a url parameter arg.
+					 * If yes, show the right info.
+					 */
+					var geoidParam = getUrlParameter( "geoid" );
+					if ( geoidParam ) {
+						var passedIds = geoidParam.split(',');
+						/*
+						 * First, set map to the correct geography type.
+						 * This is done by checking to see what geography type the passed geoIDs are.
+						 */
+						var prefix = passedIds[0].substr( 0, 3 );
+						$.each( MCC.geog, function(index, el){
+							if ( el.geo_key == prefix ) {
+								geoSelector.selectedGeography = index;
+							}
+						});
+
+						// Next, we select the items on the map, which will start the cascade for showing the directory items.
+						if ( layerSelect ) {
+							layerSelect.query()
+								.layer(MCC.geog[geoSelector.selectedGeography].select_ids[0])
+								.where("GEOID IN ('" + passedIds.join("','") + "')")
+								.run(function (error, featureCollection, response) {
+										setSelectionDef(featureCollection, false);
+							});
+						}
+					}
 				});
 			},
 			watch: {
@@ -646,41 +676,6 @@
 					this.items.splice(index, 1);
 				}
 			},
-			mounted: function () {
-				/*
-				 * When the short list is built on page load, check to see
-				 * if a selection area has been passed as a url parameter arg.
-				 * If yes, show the right info.
-				 */
-				this.$nextTick(function () {
-					var geoidParam = getUrlParameter( "geoid" );
-					if ( geoidParam ) {
-						var passedIds = geoidParam.split(',');
-						/*
-						 * First, set map to the correct geography type.
-						 * This is done by checking to see what geography type the passed geoIDs are.
-						 */
-						var prefix = passedIds[0].substr( 0, 3 );
-						$.each( MCC.geog, function(index, el){
-							if ( el.geo_key == prefix ) {
-								$("input[name='geography_type']").filter('[value='+index+']').prop('checked', true);
-								loadDataActiveGeog( index );
-								return false;
-							}
-						});
-
-						// Next, we select the items on the map, which will start the cascade for showing the directory items.
-						if ( layerSelect ) {
-							layerSelect.query()
-								.layer(MCC.geog[geoSelector.selectedGeography].select_ids[0])
-								.where("GEOID IN ('" + passedIds.join("','") + "')")
-								.run(function (error, featureCollection, response) {
-										setSelectionDef(featureCollection, false);
-							});
-						}
-					}
-				});
-			}
 		});
 	}
 
