@@ -44,7 +44,7 @@ function enqueue_styles_scripts() {
 		wp_register_script( 'leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js', array(), '1.3.1', true );
 	} else {
 		// Load production versions.
-		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue', array(), '2.5.16', true );
+		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue@2.6.10', array(), '2.6.10', true );
 		wp_register_script( 'leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js', array(), '1.3.1', true );
 	}
 
@@ -52,8 +52,8 @@ function enqueue_styles_scripts() {
 	wp_enqueue_style( 'leaflet-style', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css', array(), '1.3.1', 'screen' );
 
 	// ESRI add-ons for Leaflet.
-	wp_register_script( 'esri-leaflet-script', 'https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js', array( 'jquery', 'leaflet' ), '2.1.0');
-	wp_register_script( 'esri-leaflet-geocoder-script', 'https://unpkg.com/esri-leaflet-geocoder@2.2.8/dist/esri-leaflet-geocoder-debug.js', array( 'leaflet', 'esri-leaflet-script' ), '2.2.8');
+	wp_register_script( 'esri-leaflet-script', 'https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js', array( 'jquery', 'leaflet' ), '2.1.0', true );
+	wp_register_script( 'esri-leaflet-geocoder-script', 'https://unpkg.com/esri-leaflet-geocoder@2.2.8/dist/esri-leaflet-geocoder-debug.js', array( 'leaflet', 'esri-leaflet-script' ), '2.2.8', true);
 	wp_enqueue_style( 'esri-leaflet-geocoder-style', 'https://unpkg.com/esri-leaflet-geocoder@2.2.8/dist/esri-leaflet-geocoder.css', array(), '2.2.8', 'all' );
 
 	// This is the main script that builds the interface and handles user interaction.
