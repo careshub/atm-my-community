@@ -39,7 +39,7 @@ function enqueue_styles_scripts() {
 	// Is the shortcode used on this page?
 	$enqueue_on_pages = get_option( 'atm-my-community-report-pages' );
 	$current_page_id  = get_the_ID(); // This should work for any post type.
-	if ( ! $enqueue_on_pages || ! in_array( $current_page_id, (array) $enqueue_on_pages ) ) ) {
+	if ( ! $enqueue_on_pages || ! in_array( $current_page_id, (array) $enqueue_on_pages ) ) {
 		return;
 	}
 
