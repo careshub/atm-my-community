@@ -45,11 +45,11 @@ function my_community_shortcode( $atts, $content ) {
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 		// Load development versions of scripts for easier debugging.
-		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', array(), '2.5.16', true );
+		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js', array(), null, true );
 		wp_register_script( 'leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js', array(), '1.3.1', true );
 	} else {
 		// Load production versions.
-		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue@2.6.10', array(), '2.6.10', true );
+		wp_register_script( 'vue-js', 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js', array(), null, true );
 		wp_register_script( 'leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js', array(), '1.3.1', true );
 	}
 
