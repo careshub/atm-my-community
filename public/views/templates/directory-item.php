@@ -34,11 +34,11 @@
 <li>
 	<h4 class="district-name">{{entry.name}}</h4>
 	<ul>
-		<li class="area district-data-detail district-data-level-1 icon-location" v-if="entry.area">{{entry.area}}</li>
-		<li class="population district-data-detail district-data-level-1 icon-users" v-if="entry.population">Population: {{entry.population}}</li>
-		<li class="students district-data-detail district-data-level-1 icon-bell" v-if="entry.students">Public School Enrollment: {{entry.students}}</li>
-		<li class="pct-area district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_area">Area of your community within {{entry.name}}: {{entry.pct_area}}%</li>
-		<li class="pct-population district-data-detail district-data-level-1 icon-stats-bars2" v-if="entry.pct_population">Population of your community within {{entry.name}}: {{entry.pct_population}}%</li>
+		<li class="area district-data-detail district-data-level-1 icomoon-location" v-if="entry.area">{{entry.area}}</li>
+		<li class="population district-data-detail district-data-level-1 icomoon-users" v-if="entry.population">Population: {{entry.population}}</li>
+		<li class="students district-data-detail district-data-level-1 icomoon-bell" v-if="entry.students">Public School Enrollment: {{entry.students}}</li>
+		<li class="pct-area district-data-detail district-data-level-1 icomoon-stats-bars2" v-if="entry.pct_area">Area of your community within {{entry.name}}: {{entry.pct_area}}%</li>
+		<li class="pct-population district-data-detail district-data-level-1 icomoon-stats-bars2" v-if="entry.pct_population">Population of your community within {{entry.name}}: {{entry.pct_population}}%</li>
 		<li class="contacts district-data-detail district-data-level-1" v-if="entry.contacts">
 			<ul>
 				<li
@@ -58,7 +58,7 @@
 
 <script type="text/x-template" id="directory-item-vcard">
 	<li class="contact-vcard">
-		<ul class="icon-address-book">
+		<ul class="icomoon-address-book">
 			<li class="name district-data-detail" v-if="contact.name">{{contact.name}}<span class="party-affiliation" v-if="contact.party"> &ndash; {{contact.party}}</span></li>
 			<li class="title district-data-detail" v-if="contact.title">{{contact.title}}</li>
 			<li class="address district-data-detail" v-if="contact.address">{{contact.address}}</li>

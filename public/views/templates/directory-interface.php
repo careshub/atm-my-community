@@ -32,7 +32,7 @@
 		<h4>Selected Areas</h4>
 		<div id="geo-short-results" class="geo-short-results-list">
 			<button v-for="(item, index) in items" type="button" aria-pressed="false" v-bind:id="'geoidShort-'+item.geoid" class="geo-short-results-item" @click="deleteItem(item,index)" v-bind:aria-label="'Deselect ' + item.label" v-bind:title="'Deselect ' + item.label">
-			  {{item.label}} <span class="icon-cross"></span>
+			  {{item.label}} <span class="icomoon-cross"></span>
 			</button>
 			<span v-if="items.length == 0" id="geo-short-results-no-selection">Click the map or search for an address above to select areas.</span>
 		</div>

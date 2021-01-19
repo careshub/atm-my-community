@@ -9,8 +9,8 @@
 	font-style: normal;
 }
 
-[class^="icon-"]:before,
-[class*=" icon-"]:before {
+[class^="icomoon-"]:before,
+[class*=" icomoon-"]:before {
 	/* use !important to prevent issues with browser extensions that change fonts */
 	font-family: 'icomoon' !important;
 	color: #333;
@@ -26,50 +26,50 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-address-book:before {
+.icomoon-address-book:before {
 	content: "\e944";
 }
-.icon-location:before {
+.icomoon-location:before {
 	content: "\e947";
 }
-.icon-bell:before {
+.icomoon-bell:before {
 	content: "\e951";
 }
-.icon-users:before {
+.icomoon-users:before {
 	content: "\e972";
 }
-.icon-search:before {
+.icomoon-search:before {
 	content: "\e986";
 }
-.icon-stats-bars:before {
+.icomoon-stats-bars:before {
 	content: "\e99c";
 }
-.icon-stats-bars2:before {
+.icomoon-stats-bars2:before {
 	content: "\e99d";
 }
-.icon-rocket:before {
+.icomoon-rocket:before {
 	content: "\e9a5";
 }
-.icon-meter:before {
+.icomoon-meter:before {
 	content: "\e9a6";
 }
-.icon-meter2:before {
+.icomoon-meter2:before {
 	content: "\e9a7";
 }
-.icon-cross:before {
+.icomoon-cross:before {
 	content: "\ea0f";
 	color: maroon;
 }
-.icon-radio-checked:before {
+.icomoon-radio-checked:before {
 	content: "\ea54";
 }
-.icon-radio-checked2:before {
+.icomoon-radio-checked2:before {
 	content: "\ea55";
 }
-.icon-radio-unchecked:before {
+.icomoon-radio-unchecked:before {
 	content: "\ea56";
 }
-.icon-spinner8:before {
+.icomoon-spinner8:before {
 	content: "\e981";
 }
 
@@ -225,7 +225,7 @@ input[name="geography_type"]:checked + label {
 	margin-right: .4em;
 	margin-bottom: .4em;
 }
-.geo-short-results-item .icon-cross {
+.geo-short-results-item .icomoon-cross {
 	margin-left: .2em;
 	font-size: .8em;
 }
@@ -262,8 +262,8 @@ input[name="geography_type"]:checked + label {
 	width: 95%;
 	display: inline-block;
 }
-.district-data-items [class^="icon-"]:before,
-.district-data-items [class*=" icon-"]:before {
+.district-data-items [class^="icomoon-"]:before,
+.district-data-items [class*=" icomoon-"]:before {
 		margin-right: .5em;
 		margin-left: -1.6em;
 }
